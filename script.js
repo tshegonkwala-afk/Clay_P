@@ -1,93 +1,73 @@
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+const yesBtn = document.getElementById('yesBtn');
+const noBtn = document.getElementById('noBtn');
+const response = document.getElementById('response');
+
+// Yes Button click
+yesBtn.addEventListener('click', () => {
+    response.textContent = "Yay! See you at Hyde Park for a lovely afternoon of clay painting 🎨❤️";
+    response.classList.remove('hidden');
+    startConfetti();
+});
+
+// No Button click
+noBtn.addEventListener('click', () => {
+    response.textContent = "Nice try 😉";
+    response.classList.remove('hidden');
+});
+
+/* ---------------- Confetti Code ---------------- */
+const confettiCanvas = document.getElementById('confetti');
+const ctx = confettiCanvas.getContext('2d');
+confettiCanvas.width = window.innerWidth;
+confettiCanvas.height = window.innerHeight;
+
+let confettiParticles = [];
+
+function createConfetti() {
+    for(let i=0; i<150; i++){
+        confettiParticles.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight - window.innerHeight,
+            r: Math.random() * 6 + 4,
+            d: Math.random() * 40 + 10,
+            color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+            tilt: Math.random() * 10 - 10,
+            tiltAngleIncremental: Math.random() * 0.07 + 0.05
+        });
+    }
 }
 
-/* Background GIF */
-.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif') no-repeat center center/cover;
-    z-index: -2;
-    filter: brightness(0.8);
+function drawConfetti() {
+    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    confettiParticles.forEach(p => {
+        ctx.beginPath();
+        ctx.lineWidth = p.r / 2;
+        ctx.strokeStyle = p.color;
+        ctx.moveTo(p.x + p.tilt + p.r / 4, p.y);
+        ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 4);
+        ctx.stroke();
+    });
+    updateConfetti();
 }
 
-/* Overlay container */
-body {
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    background: #ffccd5; /* fallback */
-    overflow: hidden;
+function updateConfetti() {
+    confettiParticles.forEach(p => {
+        p.tiltAngle += p.tiltAngleIncremental;
+        p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+        p.tilt = Math.sin(p.tiltAngle) * 15;
+
+        if(p.y > window.innerHeight) {
+            p.x = Math.random() * window.innerWidth;
+            p.y = -20;
+            p.tilt = Math.random() * 10 - 10;
+        }
+    });
 }
 
-.container {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 30px 20px;
-    border-radius: 25px;
-    max-width: 90%;
-    z-index: 2;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+let confettiInterval;
+function startConfetti(){
+    createConfetti();
+    confettiInterval = setInterval(drawConfetti, 20);
 }
 
-h1 {
-    font-size: 2em;
-    margin-bottom: 15px;
-    color: #ff9ecb;
-}
-
-p {
-    font-size: 1.2em;
-    margin-bottom: 25px;
-}
-
-.buttons button {
-    padding: 15px 25px;
-    font-size: 18px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    margin: 10px;
-    transition: transform 0.2s;
-}
-
-.buttons button:hover {
-    transform: scale(1.1);
-}
-
-#yesBtn {
-    background-color: #ff4d6d;
-    color: white;
-}
-
-#noBtn {
-    background-color: #cccccc;
-    color: #333;
-}
-
-.hidden {
-    display: none;
-    margin-top: 20px;
-    font-size: 1.3em;
-}
-
-/* Confetti canvas */
-#confetti {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
 
