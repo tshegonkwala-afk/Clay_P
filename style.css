@@ -14,50 +14,50 @@
     height: 100%;
     background: url('https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif') no-repeat center center/cover;
     z-index: -2;
-    filter: brightness(0.8);
+    filter: brightness(0.9);
 }
 
-/* Overlay container */
+/* Body & container */
 body {
-    font-family: 'Arial', sans-serif;
-    color: #fff;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     text-align: center;
-    background: #ffccd5; /* fallback */
     overflow: hidden;
 }
 
 .container {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 30px 20px;
+    background: rgba(255, 182, 193, 0.9); /* pink overlay */
+    padding: 35px 25px;
     border-radius: 25px;
     max-width: 90%;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
     z-index: 2;
-    box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 2.5em;
     margin-bottom: 15px;
-    color: #ff9ecb;
+    color: #ff1c8d; /* hot pink */
 }
 
 p {
-    font-size: 1.2em;
+    font-size: 1.3em;
     margin-bottom: 25px;
+    color: #800040;
 }
 
 .buttons button {
-    padding: 15px 25px;
-    font-size: 18px;
+    padding: 15px 30px;
+    font-size: 20px;
     border: none;
-    border-radius: 12px;
+    border-radius: 15px;
     cursor: pointer;
     margin: 10px;
     transition: transform 0.2s;
+    font-weight: bold;
 }
 
 .buttons button:hover {
@@ -65,19 +65,21 @@ p {
 }
 
 #yesBtn {
-    background-color: #ff4d6d;
-    color: white;
+    background: linear-gradient(45deg, #ff6eb4, #ff1493);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
 }
 
 #noBtn {
-    background-color: #cccccc;
-    color: #333;
+    background-color: #ffc0cb;
+    color: #800040;
 }
 
 .hidden {
     display: none;
     margin-top: 20px;
     font-size: 1.3em;
+    font-weight: bold;
 }
 
 /* Confetti canvas */
@@ -90,4 +92,3 @@ p {
     height: 100%;
     z-index: -1;
 }
-
