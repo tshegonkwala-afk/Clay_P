@@ -5,14 +5,12 @@
     box-sizing: border-box;
 }
 
-/* ---------------- Background GIF ---------------- */
 .background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Use the local GIF file */
     background: url('corazon-de-minion-minion.gif') no-repeat center center/cover;
     z-index: -2;
     filter: brightness(0.9);
