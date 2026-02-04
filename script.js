@@ -4,7 +4,7 @@ const response = document.getElementById('response');
 
 // Yes Button click
 yesBtn.addEventListener('click', () => {
-    response.textContent = "Yay! See you at Hyde Park for a lovely afternoon of clay painting 🎨❤️";
+    response.textContent = "Yay! See you at Hyde Park for a lovely afternoon of clay painting 🎨💗";
     response.classList.remove('hidden');
     startConfetti();
 });
@@ -30,7 +30,7 @@ function createConfetti() {
             y: Math.random() * window.innerHeight - window.innerHeight,
             r: Math.random() * 6 + 4,
             d: Math.random() * 40 + 10,
-            color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+            color: `hsl(${Math.random() * 340 + 320}, 70%, 60%)`, // pink-purple range
             tilt: Math.random() * 10 - 10,
             tiltAngleIncremental: Math.random() * 0.07 + 0.05
         });
@@ -69,5 +69,3 @@ function startConfetti(){
     createConfetti();
     confettiInterval = setInterval(drawConfetti, 20);
 }
-
-
